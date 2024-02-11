@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import HomeScreen from "./Screens/HomeScreen";
+import { Provider } from "react-redux";
+import { store } from "./ReduxSlice/store";
+import Cars from "./Screens/Cars";
+import Screens from "./Screens/Screens";
 
-export default function App() {
+const App = () => {
+  const [state, setstate] = useState(0);
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      {state === 0 && <HomeScreen setstate={setstate} />}
+      {state === 1 && <Cars setstate={setstate} />}
+      {state === 2 && <Screens setstate={setstate} />}
+    </Provider>
   );
-}
+};
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
   },
 });
